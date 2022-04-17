@@ -1,6 +1,8 @@
 const path = require("path");
 const fs = require("fs");
 const schemaHandler = require("./utils/handleSchema");
+const formatLog = require("./utils/formatLog");
+
 
 const baseDir = path.resolve("./data");
 
@@ -10,22 +12,28 @@ const commandHanlders = {};
 commandHanlders.createcategory = (data) => {
   const titleArr = data.split(" ");
   if (!titleArr[2]) {
-    console.log("Category needs a name");
-  }
-  let dir = path.join(baseDir, titleArr[2]);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, true);
-    let res = schemaHandler.parse()
-    let newArr = { ...res, [titleArr[2]] : {}  }
-    schemaHandler.write(newArr)
-    console.log("category created");
+    formatLog("category needs a name", "alert")
   } else {
-    console.log("Already exists");
+    let dir = path.join(baseDir, titleArr[2]);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, true);
+      let res = schemaHandler.parse()
+      let newArr = { ...res, [titleArr[2]] : {}  }
+      schemaHandler.write(newArr)
+      formatLog("category created", "success")
+    } else {
+      formatLog("category with the name already exists", "alert")
+    }
   }
+
 };
 
-//list category
-commandHanlders.listCategory = () => {};
+//list all categories
+commandHanlders.listCategory = (data) => {
+
+
+
+};
 
 commandHanlders.deleteCategory = () => {};
 

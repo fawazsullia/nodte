@@ -16,6 +16,9 @@ const _interface = readLine.createInterface({
 // const schemaHandler = require("./utils/handleSchema");
 // schemaHandler.write({first : {}})
 
+// console.log('\x1b[36m%s\x1b[0m', "Hello world");  //cyan
+
+
 // process the input
 _interface.prompt()
 _interface.on("line", (data)=>{
