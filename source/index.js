@@ -30,5 +30,6 @@ if(currentProcess === "command"){
 if(currentProcess === "note"){
     readAsNote(data)
 }
+_interface.prompt()
 
 })
