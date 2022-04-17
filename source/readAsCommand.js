@@ -17,6 +17,8 @@ processCommandInput.commands = {
   "note create": "note create --title",
   "note show": "note show id",
   "note delete": "note delete id",
+  //other
+  "clear" : "clears the console"
 };
 
 /******************************************************* ****************************************/
@@ -50,6 +52,10 @@ e.on("note-delete", function (data) {
   commandHanlders.deleteNote(data);
 });
 
+e.on("clear", function(){
+  commandHanlders.clear()
+})
+
 e.on("invalid", function () {
   console.log("Invalid Command");
 });
@@ -58,7 +64,9 @@ e.on("invalid", function () {
 
 processCommandInput.readAsCommand = (data) => {
   const command = data.split(" ");
-  if (`${command[0]} ${command[1]}` in processCommandInput.commands) {
+  if(command[0] === "clear"){
+    e.emit("clear")
+  } else if (`${command[0]} ${command[1]}` in processCommandInput.commands) {
     e.emit(command[0] + "-" + command[1], data);
   } else {
     e.emit("invalid");

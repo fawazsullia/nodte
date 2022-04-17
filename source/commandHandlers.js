@@ -9,6 +9,11 @@ const baseDir = path.resolve("./data");
 
 const commandHanlders = {};
 
+//clear the console
+commandHanlders.clear= ()=>{
+  console.clear()
+}
+
 //create a category
 commandHanlders.createcategory = (data) => {
   const titleArr = data.split(" ");
