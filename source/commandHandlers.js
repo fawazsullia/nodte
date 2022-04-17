@@ -21,9 +21,9 @@ commandHanlders.createcategory = (data) => {
       let res = schemaHandler.parse()
       let newArr = { ...res, [titleArr[2]] : {}  }
       schemaHandler.write(newArr)
-      formatLog("category created", "success")
+      formatLog("category created, name: "+titleArr[2], "success")
     } else {
-      formatLog("category with the name already exists", "alert")
+      formatLog("category with the name " + titleArr[2]+" already exists", "alert")
     }
   }
 
