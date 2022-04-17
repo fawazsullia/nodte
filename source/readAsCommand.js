@@ -10,7 +10,7 @@ const processCommandInput = {};
 processCommandInput.commands = {
   //category commands
   "cat create": "cat create name",
-  "cat list": "cat list name",
+  "cat list": "cat list",
   "cat delete": "cat delete name",
   "cat notes": "cat notes name",
   //note related
