@@ -6,6 +6,12 @@ function formatLog(str, type){
         console.log('\x1b[31m%s\x1b[0m', str);
     } else if(type==="success"){
         console.log('\x1b[32m%s\x1b[0m', str);
+    } else if(type==="list"){
+        console.log('\x1b[34m%s\x1b[0m', str);
+    } else if(type === "line"){
+        console.log('\x1b[36m%s\x1b[0m', str);
+    } else if(type === "heading"){
+        console.log('\x1b[36m%s\x1b[0m', str);
     }
 }
 
