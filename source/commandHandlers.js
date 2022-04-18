@@ -99,9 +99,11 @@ if(!fs.existsSync(requiredDir)){
     if (err){
       formatLog("Could not create the note", "alert")
     }else {
+      const res= schemaHandler.parse()
+      const newArr = res
+      newArr[commandArr[1].trim()][id] = commandArr[2]
+      schemaHandler.write(newArr)
     formatLog("Note created successfully", "success")
-    // I need to edit the schema file here
-    //alternatively, when note handler is ready, you can trigger open
     }
   }); 
 
