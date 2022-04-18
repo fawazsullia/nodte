@@ -79,7 +79,30 @@ commandHanlders.deleteCategory = (data) => {
 
 };
 
-commandHanlders.listCategoryNotes = () => {};
+//list all notes in a category
+commandHanlders.listCategoryNotes = (data) => {
+  const commandArr = data.split(" ")
+  const category = commandArr[2].trim()
+  let requiredDir = baseDir+"/"+category
+  if(fs.existsSync(requiredDir)){
+    formatters.heading("list of notes in "+category)
+    const res = schemaHandler.parse()
+    const reqCategory = res[category] //gives me the object with title
+    formatters.vertSpace(1)
+    for(let id in reqCategory){
+      console.log(id+" : "+reqCategory[id])
+    }
+    formatters.vertSpace(1)
+    formatters.line()
+  }
+  else {
+    formatLog("category with name "+ category+" does not exist", "alert")
+  }
+
+
+
+
+};
 
 
 //create a note
