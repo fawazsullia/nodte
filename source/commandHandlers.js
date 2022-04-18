@@ -3,6 +3,7 @@ const fs = require("fs");
 const schemaHandler = require("./utils/handleSchema");
 const formatLog = require("./utils/formatLog");
 const formatters = require("./utils/formatters")
+const crypto = require("crypto");
 
 
 const baseDir = path.resolve("./data");
@@ -82,7 +83,32 @@ commandHanlders.listCategoryNotes = () => {};
 
 
 //create a note
-commandHanlders.createNote = () => {};
+commandHanlders.createNote = (data) => {
+const commandArr = data.split("--")
+if(commandArr.length < 3){
+  formatLog("a category name and title is required", "alert")
+} else {
+  const requiredDir = baseDir+"/"+ commandArr[1].trim()
+
+if(!fs.existsSync(requiredDir)){
+  formatLog("category "+ commandArr[1]+"does not exist")
+}else {
+  //create a file here
+  const id = crypto.randomBytes(14).toString("hex");
+  fs.writeFile(`${requiredDir}/${id}.txt`,"",function(err){
+    if (err){
+      formatLog("Could not create the note", "alert")
+    }else {
+    formatLog("Note created successfully", "success")
+    // I need to edit the schema file here
+    //alternatively, when note handler is ready, you can trigger open
+    }
+  }); 
+
+}
+}
+
+};
 
 commandHanlders.showNote = () => {};
 

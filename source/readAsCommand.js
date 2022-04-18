@@ -14,7 +14,7 @@ processCommandInput.commands = {
   "cat delete": "cat delete name",
   "cat notes": "cat notes name",
   //note related
-  "note create": "note create --title",
+  "note create": "note create --category --title",
   "note show": "note show id",
   "note delete": "note delete id",
   //other
