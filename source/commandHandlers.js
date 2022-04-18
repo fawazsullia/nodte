@@ -91,10 +91,10 @@ if(commandArr.length < 3){
   const requiredDir = baseDir+"/"+ commandArr[1].trim()
 
 if(!fs.existsSync(requiredDir)){
-  formatLog("category "+ commandArr[1]+"does not exist")
+  formatLog("category "+ commandArr[1]+"does not exist", "alert")
 }else {
   //create a file here
-  const id = crypto.randomBytes(14).toString("hex");
+  const id = crypto.randomInt(1,100000).toString();
   fs.writeFile(`${requiredDir}/${id}.txt`,"",function(err){
     if (err){
       formatLog("Could not create the note", "alert")
