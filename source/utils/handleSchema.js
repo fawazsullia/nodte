@@ -14,4 +14,6 @@ schemaHandler.write = (obj)=> {
 fs.writeFileSync(pathToSchema, JSON.stringify(obj))
 }
 
+
+
 module.exports = schemaHandler

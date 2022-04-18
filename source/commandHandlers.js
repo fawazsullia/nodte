@@ -53,10 +53,35 @@ commandHanlders.listCategory = (data) => {
 
 };
 
-commandHanlders.deleteCategory = () => {};
+//delete category
+commandHanlders.deleteCategory = (data) => {
+  const commandArr = data.split(" ");
+  let requiredDir = baseDir+"/"+commandArr[2]
+  if (fs.existsSync(requiredDir)) {
+    fs.rm(requiredDir, { recursive: true }, (err) => {
+      if (!err) {
+        let res = schemaHandler.parse()
+        let newArr = res
+        delete newArr[commandArr[2]]
+        console.log(newArr)
+        schemaHandler.write(newArr)
+        formatLog("category "+commandArr[2]+" deleted", "success")
+      }
+      else {
+        formatLog("could not delete the category","alert")
+      }
+  
+       });
+} else {
+    formatLog("category not found", "alert")
+}
+
+};
 
 commandHanlders.listCategoryNotes = () => {};
 
+
+//create a note
 commandHanlders.createNote = () => {};
 
 commandHanlders.showNote = () => {};
