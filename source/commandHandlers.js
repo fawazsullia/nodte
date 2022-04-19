@@ -6,7 +6,7 @@ const formatters = require("./utils/formatters")
 const crypto = require("crypto");
 
 
-const baseDir = path.resolve("./data");
+const baseDir = path.join(__dirname,"./../data")
 
 const commandHanlders = {};
 

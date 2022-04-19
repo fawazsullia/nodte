@@ -2,7 +2,7 @@
 const fs = require("fs")
 const path = require("path")
 
-const pathToSchema = path.resolve("./source/schema.txt")
+const pathToSchema = path.join(__dirname, "./../schema.txt")
 
 const schemaHandler = {}
 
