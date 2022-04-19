@@ -6,6 +6,7 @@ const formatters = require("./utils/formatters")
 const crypto = require("crypto");
 
 
+
 const baseDir = path.join(__dirname,"./../data")
 
 const commandHanlders = {};
@@ -126,7 +127,7 @@ if(!fs.existsSync(requiredDir)){
       const newArr = res
       newArr[commandArr[1].trim()][id] = commandArr[2]
       schemaHandler.write(newArr)
-    formatLog("Note created successfully", "success")
+      formatLog("Note created successfully", "success")
     }
   }); 
 
@@ -135,8 +136,36 @@ if(!fs.existsSync(requiredDir)){
 
 };
 
+
+//show a particular note
 commandHanlders.showNote = () => {};
 
-commandHanlders.deleteNote = () => {};
+
+//delete a note
+commandHanlders.deleteNote = (data) => {
+  const commandArr = data.split(" ")
+  const id = commandArr[3]
+  const category = commandArr[2]
+  if(!category || !id){
+    formatLog("Note id and category required", "alert")
+  }else{
+    const res = schemaHandler.parse()
+    const newObj = res
+    if(category in newObj){
+      if(id in newObj[category]){
+        const title = newObj[category][id]
+        const p = path.join(baseDir,category,`${id}.txt`)
+        fs.unlinkSync(p)
+        delete newObj[category[id]]
+        schemaHandler.write(newObj)
+        formatLog("Note with title "+title+" deleted", "success")
+      } else {
+        formatLog("Invalid id", "alert")
+      }
+    }
+    else {formatLog(category+ " is not a valid category", "alert")}
+   
+    }
+};
 
 module.exports = commandHanlders;

@@ -4,7 +4,6 @@ const {readAsCommand} = require("./readAsCommand")
 const readAsNote = require("./readAsNote")
 
 //variable to track the process type
-let currentProcess = "command"
 
 //interface to read line
 const _interface = readLine.createInterface({
@@ -18,18 +17,16 @@ const _interface = readLine.createInterface({
 
 // console.log('\x1b[36m%s\x1b[0m', "Hello world");  //cyan
 
+//switch to note editing more
+
 
 // process the input
 _interface.prompt()
 _interface.on("line", (data)=>{
-
-//check the currentProcess
-if(currentProcess === "command"){
     readAsCommand(data)
-}
-if(currentProcess === "note"){
-    readAsNote(data)
-}
+
+
 _interface.prompt()
 
 })
+

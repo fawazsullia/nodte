@@ -3,7 +3,8 @@
 const _event = require("events");
 const e = new _event();
 const commandHanlders = require("./commandHandlers");
-
+const readAsNote = require("./readAsNote");
+let currentProcess = "command"
 const processCommandInput = {};
 
 //List of all commands that is going to be used
@@ -15,8 +16,8 @@ processCommandInput.commands = {
   "cat notes": "cat notes name",
   //note related
   "note create": "note create --category --title",
-  "note show": "note show id",
-  "note delete": "note delete id",
+  "note show": "note show category id",
+  "note delete": "note delete category id",
   //other
   "clear" : "clears the console"
 };
@@ -42,6 +43,7 @@ e.on("cat-notes", function (data) {
 
 e.on("note-create", function (data) {
   commandHanlders.createNote(data);
+  currentProcess = "note"
 });
 
 e.on("note-show", function (data) {
@@ -64,12 +66,22 @@ e.on("invalid", function () {
 
 processCommandInput.readAsCommand = (data) => {
   const command = data.split(" ");
+  if(currentProcess==="note"){
+    if(data.trim()===":wq"){
+      currentProcess = "command"
+    } else {
+      readAsNote(data)
+    }
+
+  } else {
+
   if(command[0] === "clear"){
     e.emit("clear")
   } else if (`${command[0]} ${command[1]}` in processCommandInput.commands) {
     e.emit(command[0] + "-" + command[1], data);
   } else {
     e.emit("invalid");
+  }
   }
 };
 
