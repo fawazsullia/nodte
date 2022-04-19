@@ -3,9 +3,10 @@
 const _event = require("events");
 const e = new _event();
 const commandHanlders = require("./commandHandlers");
-const readAsNote = require("./readAsNote");
+const noteHandlers = require("./handleNoteCommands");
 let currentProcess = "command"
 const processCommandInput = {};
+let currentNote = ""
 
 //List of all commands that is going to be used
 processCommandInput.commands = {
@@ -42,8 +43,10 @@ e.on("cat-notes", function (data) {
 });
 
 e.on("note-create", function (data) {
-  commandHanlders.createNote(data);
-  currentProcess = "note"
+  const r = commandHanlders.createNote(data);
+  if(r.status === true){
+    currentNote = r.id
+  }
 });
 
 e.on("note-show", function (data) {
@@ -58,6 +61,24 @@ e.on("clear", function(){
   commandHanlders.clear()
 })
 
+//handling note opening and editing
+e.on("enter-write-note", function(data){
+currentProcess = "note"
+const d = data.split("--")
+const title = d[2].trim()
+noteHandlers.enter(title)
+})
+
+e.on("exit-write-note", function(data){
+noteHandlers.exit(data)
+currentProcess = "command"
+})
+
+e.on("handle-write-note", function(){
+console.log(currentNote)
+})
+
+//invalid commands
 e.on("invalid", function () {
   console.log("Invalid Command");
 });
@@ -67,12 +88,11 @@ e.on("invalid", function () {
 processCommandInput.readAsCommand = (data) => {
   const command = data.split(" ");
   if(currentProcess==="note"){
-    if(data.trim()===":wq"){
-      currentProcess = "command"
+    if(data.trim()===":wq" || data.trim()===":q"){
+      e.emit("exit-write-note", data.trim())
     } else {
-      readAsNote(data)
+      e.emit("handle-write-note", data)
     }
-
   } else {
 
   if(command[0] === "clear"){

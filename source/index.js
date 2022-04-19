@@ -1,7 +1,6 @@
 const readLine = require("readline");
 const process = require("process")
 const {readAsCommand} = require("./readAsCommand")
-const readAsNote = require("./readAsNote")
 
 //variable to track the process type
 
