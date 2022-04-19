@@ -114,7 +114,7 @@ commandHanlders.createNote = (data) => {
       newArr[commandArr[1].trim()][id] = commandArr[2];
       schemaHandler.write(newArr);
       formatLog("Note created successfully", "success");
-      return { staus: true, id };
+      return { status: true, id };
     }
   }
 };

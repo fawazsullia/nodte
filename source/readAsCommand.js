@@ -46,6 +46,7 @@ e.on("note-create", function (data) {
   const r = commandHanlders.createNote(data);
   if(r.status === true){
     currentNote = r.id
+    e.emit("enter-write-note", data)
   }
 });
 
