@@ -14,6 +14,27 @@ commandHanlders.clear = () => {
   console.clear();
 };
 
+//print the manual
+commandHanlders.man = (data, commands)=>{
+formatters.heading("LIST OF COMMANDS")
+formatters.vertSpace(1)
+for(let command in commands){
+  let space = 20 - command.length
+  let s = ""
+  s = command
+  for(let i =0; i<space;i++){
+    s+=" "
+  }
+  s+=commands[command]
+  console.log(s)
+
+}
+formatters.vertSpace(1)
+formatters.line()
+
+
+}
+
 //create a category
 commandHanlders.createcategory = (data) => {
   const titleArr = data.split(" ");

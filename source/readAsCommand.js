@@ -92,6 +92,11 @@ e.on("handle-write-note", function(data){
 noteHandlers.write(data)
 })
 
+//man command
+e.on("man", function(data){
+  commandHanlders.man(data, processCommandInput.commands)
+})
+
 //invalid commands
 e.on("invalid", function () {
   console.log("Invalid Command");
@@ -99,6 +104,8 @@ e.on("invalid", function () {
 
 /******************************************************* ****************************************/
 
+
+//process all the commands to trigger events
 processCommandInput.readAsCommand = (data) => {
   const command = data.split(" ");
   if(currentProcess==="note"){
@@ -109,7 +116,10 @@ processCommandInput.readAsCommand = (data) => {
     }
   } else {
 
-  if(command[0] === "clear"){
+  if(command[0].trim()==="man"){
+    e.emit("man", data)
+  }
+  else if(data.trim() === "clear"){
     e.emit("clear")
   } else if (`${command[0]} ${command[1]}` in processCommandInput.commands) {
     e.emit(command[0] + "-" + command[1], data);
