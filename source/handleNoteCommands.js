@@ -17,7 +17,6 @@ handleNoteCommands.exit = (data, currentNote, currentCat)=>{
     //check what the command is, :wq or :q
     if(data.trim()===":wq"){
         currentNote = currentNote.trim()
-        console.log(currentNote, data, noteStr)
         fs.appendFileSync(pathToData+"/"+currentCat+"/"+currentNote+".txt", noteStr)
         formatter.heading("NOTE SAVED AND EXITED")   
     }else if(data.trim()===":q"){
