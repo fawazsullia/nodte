@@ -12,6 +12,9 @@ function formatLog(str, type){
         console.log('\x1b[36m%s\x1b[0m', str);
     } else if(type === "heading"){
         console.log('\x1b[36m%s\x1b[0m', str);
+    } else if(type === "note"){
+        console.log('\x1b[38m%s\x1b[0m', str);
+
     }
 }
 

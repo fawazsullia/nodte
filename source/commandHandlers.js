@@ -120,13 +120,41 @@ commandHanlders.createNote = (data) => {
 };
 
 //show a particular note
-commandHanlders.showNote = () => {};
+commandHanlders.showNote = (data) => {
+
+const commandArr = data.split(" ")
+
+if (commandArr.length < 4) {
+  formatLog("Note id and category required", "alert");
+} else {
+  const id = commandArr[3].trim();
+const category = commandArr[2].trim();
+  const res = schemaHandler.parse();
+  const newObj = res;
+  if (category in newObj) {
+    if (id in newObj[category]) {
+      const note = fs.readFileSync(baseDir+"/"+category+"/"+id+".txt")
+      formatters.vertSpace(1)
+      formatters.heading("READING NOTE : "+newObj[category][id])
+      formatLog(note,"note")
+
+      formatters.heading("END OF NOTE")
+      formatters.vertSpace(1)
+    } else {
+      formatLog("Invalid id", "alert");
+    }
+  } else {
+    formatLog(category + " is not a valid category", "alert");
+  }
+}
+
+};
 
 //delete a note
 commandHanlders.deleteNote = (data) => {
   const commandArr = data.split(" ");
-  const id = commandArr[3];
-  const category = commandArr[2];
+  const id = commandArr[3].trim();
+  const category = commandArr[2].trim();
   if (!category || !id) {
     formatLog("Note id and category required", "alert");
   } else {
