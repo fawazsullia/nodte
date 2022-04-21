@@ -1,0 +1,4 @@
+1. Hanlde all use cases and error cases
+2. Delete all notes in a category
+3. Edit individual notes (hard)
+4. Manual command to display what each command does and how to use it
