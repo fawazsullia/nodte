@@ -12,14 +12,14 @@ let currentCat = ""
 //List of all commands that is going to be used
 processCommandInput.commands = {
   //category commands
-  "cat create": "cat create name",
-  "cat list": "cat list",
-  "cat delete": "cat delete name",
-  "cat notes": "cat notes name",
+  "cat create": "cat create <name>; creates a category",
+  "cat list": "cat list; list all the categories",
+  "cat delete": "cat delete <name>; delete a category",
+  "cat notes": "cat notes <name>; list all notes in a category",
   //note related
-  "note create": "note create --category --title",
-  "note show": "note show category id",
-  "note delete": "note delete category id",
+  "note create": "note create --<category> --<title>; create a new note and add text to it",
+  "note show": "note show <category> <id>; show a note",
+  "note delete": "note delete <category> <id>; delete a note",
   //other
   "clear" : "clears the console"
 };
